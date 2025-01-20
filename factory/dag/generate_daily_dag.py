@@ -8,7 +8,7 @@ from airflow.providers.google.cloud.operators.bigquery import BigQueryInsertJobO
 from pathlib import Path
 from datetime import datetime, timedelta
 
-def load_postgres_to_csv(table_name,jobs,execute_date,config):
+def load_postgres_to_csv(table_name,jobs,execute_date,config,tables):
     hook = PostgresHook(postgres_conn_id=config.get("postgres_conn_id"))
 
     BASEDIR = Path(__file__).resolve().parent.parent.parent
@@ -70,7 +70,7 @@ def generate_dag_daily(params, table, defaul_args):
         load_postgres_to_csv_task = PythonOperator(
             task_id=f"load_postgres_to_csv_{job_name}_{table.get('table_name')}",
             python_callable=load_postgres_to_csv,
-            op_args=[table.get('table_name'),job_name, "{{ ds }}", params],
+            op_args=[table.get('table_name'),job_name, "{{ ds }}", params,table],
             dag=dag,
         )
 
