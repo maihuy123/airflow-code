@@ -1,0 +1,60 @@
+{
+    "sales" : {
+        "fields" : [
+            {
+                "name" : "sale_id",
+                "type" : "INT64",
+                "mode" : "REQUIRED"
+            },
+            {
+                "name" : "store_id",
+                "type" : "INT64",
+                "mode" : "REQUIRED"
+            },
+            {
+                "name" : "product_id",
+                "type" : "INT64",
+                "mode" : "REQUIRED"
+            },
+            {
+                "name" : "sale_date",
+                "type" : "DATE",
+                "mode" : "NULLABLE"
+            },
+            {
+                "name" : "quantity_sold",
+                "type" : "INT64",
+                "mode" : "NULLABLE"
+            },
+            {
+                "name" : "sale_amount",
+                "type" : "NUMERIC",
+                "mode" : "NULLABLE"
+            }
+        ]
+    },
+    "shipment" : {
+        "fields" : [
+            {
+                "name" : "shipment_id",
+                "type" : "INT64",
+                "mode" : "REQUIRED"
+            },
+            {
+                "name" : "store_id",
+                "type" : "INT64",
+                "mode" : "REQUIRED"
+            },
+            {
+                "name" : "product_id",
+                "type" : "INT64",
+                "mode" : "REQUIRED"
+            },
+            {
+                "name" : "shipment_date",
+                "type" : "DATE",
+                "mode" : "NULLABLE"
+            }
+        ]
+    }
+}
