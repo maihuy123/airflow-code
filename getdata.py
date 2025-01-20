@@ -28,7 +28,7 @@ def load_postgres_sql(ds, **kwargs):
     sql = template.render(
         select=params.get('select', '*'),
         table=params.get('table'),
-        where=params.get('where').replace('{{ ds }}', ds),
+        where=params.get('where').replace('{{ ds }}', ds),  
         limit=params.get('limit')
     )
     print(f"Generated SQL:\n{sql}")
@@ -53,3 +53,4 @@ with DAG(
             "limit": None
         }
     )
+    check_sql_implention
