@@ -7,6 +7,7 @@ import os
 import json
 from airflow.providers.postgres.hooks.postgres import PostgresHook
 from pathlib import Path
+from airflow.operators.empty import EmptyOperator
 
 
 defaul_args = {
@@ -43,6 +44,9 @@ with DAG(
     catchup=False,
     dag_id='test_sql',
 ) as dag:
+    dummpu_task = EmptyOperator(
+        task_id='dummy_task',
+    )
     check_sql_implention = PythonOperator(
         task_id='check_sql_implention',
         python_callable=load_postgres_sql,
