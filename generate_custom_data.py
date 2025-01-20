@@ -2,7 +2,7 @@ from datetime import datetime, timedelta
 import json
 from util.env_variables import get_config, get_schema
 from pathlib import Path
-from factory.dag.generate_daily_dag import generate_dag_daily 
+from factory.dag.generate_custom_dag import generate_dag_daily 
 
 env_vars = get_config()
 schema_vars = get_schema(Path(__file__).resolve())
@@ -30,26 +30,27 @@ params_per_dag = [
         "schedule": "@once",
         "catchup": False,
         "schema": schema_vars.get("sales").get("fields"),
-        "tasks" : ["daily_insert"],
+        "tasks" : ["daily_insert_custom"],
         "dag_run_timeout": timedelta(minutes=10),
         "postgres_sql": {
             "select" : 'sale_id, store_id, product_id, sale_date, quantity_sold, sale_amount',
             "from" : 'sales',
-            "where" : "sale_date = '{{ ds }}'",
+            "where" : "sale_date = '2024-12-20'",
             "limit" : None
         }
         
     },
     {
-        "table_name" : "shippment",
+        "table_name" : "shipment",
         "sla": timedelta(minutes=30),
         "schedule": "@daily",
         "catchup": False,
         "schema": schema_vars.get("shippment"),
-        "tasks" : ["daily_insert"],
+        "tasks" : ["daily_insert_custom"],
         "dag_run_timeout": timedelta(minutes=10),
         "postgres_sql": {
-            "select" : None,
+            "select" : 'shipment_id, order_id, product_id',
+            "from" : 'shipment',
             "where" : None,
             "limit" : None
         }
