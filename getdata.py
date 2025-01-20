@@ -57,4 +57,8 @@ with DAG(
             "limit": None
         }
     )
-    dummpu_task >> check_sql_implention
+
+    emp_test = EmptyOperator(
+        task_id='emp_test',
+    )
+    dummpu_task >> check_sql_implention >> emp_test
