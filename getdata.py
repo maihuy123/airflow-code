@@ -57,4 +57,4 @@ with DAG(
             "limit": None
         }
     )
-    check_sql_implention
+    dummpu_task >> check_sql_implention
