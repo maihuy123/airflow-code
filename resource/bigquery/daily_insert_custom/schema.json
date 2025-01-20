@@ -41,12 +41,7 @@
                 "mode" : "REQUIRED"
             },
             {
-                "name" : "store_id",
-                "type" : "INT64",
-                "mode" : "REQUIRED"
-            },
-            {
-                "name" : "product_id",
+                "name" : "customer_id",
                 "type" : "INT64",
                 "mode" : "REQUIRED"
             },
