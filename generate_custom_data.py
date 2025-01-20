@@ -49,7 +49,7 @@ params_per_dag = [
         "tasks" : ["daily_insert_custom"],
         "dag_run_timeout": timedelta(minutes=10),
         "postgres_sql": {
-            "select" : 'shipment_id, order_id, product_id',
+            "select" : 'shipment_id, customer_id, shipment_date',
             "from" : 'shipment',
             "where" : None,
             "limit" : None
