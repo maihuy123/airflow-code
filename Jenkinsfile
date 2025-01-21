@@ -9,8 +9,9 @@ pipeline{
         }
         stage('Code style check'){
             steps{
-                sh 'pip install flake8'
-                sg 'flake8'
+                sh 'python3 -m venv venv'
+                sh '. venv/bin/activate && pip install flake8'
+                sg '. venv/bin/activate && flake8'
             }
         }
     }
