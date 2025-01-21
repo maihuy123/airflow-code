@@ -75,19 +75,10 @@ def load_to_bigquery(table,jobs,config):
     except FileNotFoundError:
         raise FileNotFoundError(f"Schema file not found: {schema_path}")
     except json.JSONDecodeError as e:
-        raise ValueError(f"Failed to parse JSON schema: {e}")
-    
-    table_name = table.get('table_name')
-    if not table_name:
-        raise ValueError("`table_name` is missing in the `table` dictionary.")
-    
-    schema_table = schema.get(table_name)
-    if not schema_table:
-        raise ValueError(f"Schema for table `{table_name}` not found in: {schema_path}")
-    
+        raise ValueError(f"Failed to parse JSON schema: {e}")  
+    table_name = table.get('table_name')  
+    schema_table = schema.get(table_name)  
     bucket_name = config.get("bucket")
-    if not bucket_name:
-        raise ValueError("Bucket name is missing in the `config` dictionary.")
     
     source_uri = f"gs://{bucket_name}/{jobs}_{table_name}.csv"
     project_id = config.get("project_id")
