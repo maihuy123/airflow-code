@@ -1,7 +1,7 @@
 pipeline{
     agent any
     stages{
-        stages('Clone stage'){
+        stage('Clone stage'){
             steps{
                 echo 'Hello world'
             }
