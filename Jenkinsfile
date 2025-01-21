@@ -7,9 +7,6 @@ pipeline{
             }
             
         }
-    }
-
-    stages{
         stage('Code style check'){
             steps{
                 sh 'pip install flake8'
