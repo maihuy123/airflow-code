@@ -8,4 +8,12 @@ pipeline{
             
         }
     }
+    stages{
+        stage('Clone stage'){
+            steps{
+                echo 'Hello me'
+            }
+            
+        }
+    }
 }
