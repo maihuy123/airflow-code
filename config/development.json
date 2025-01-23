@@ -1,0 +1,9 @@
+{
+    "project_id": "my-second-project-445300",
+    "sale_dataset" : "default_table_dataset",
+    "bucket_sale" : "shippment_bucket",
+    "database" : "postgres",
+    "postgres_conn_id" : "ShoppingDB",
+    "gcs_conn_id" : "google_cloud_defaults"
+    
+}

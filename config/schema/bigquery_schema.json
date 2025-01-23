@@ -1,0 +1,184 @@
+{
+    "sales": {
+        "fields":[
+            {
+                "name": "sale_id",
+                "type": "INT64",
+                "mode": "REQUIRED"
+            },
+            {
+                "name": "store_id",
+                "type": "INT64",
+                "mode": "REQUIRED"
+            },{
+                "name": "product_id",
+                "type": "INT64",
+                "mode": "REQUIRED"
+            },
+            {
+                "name": "sale_date",
+                "type": "DATE",
+                "mode": "NULLABLE"
+            },
+            {
+                "name": "quantity_sold",
+                "type": "INT64",
+                "mode": "NULLABLE"
+            },
+            {
+                "name": "sale_amount",
+                "type": "NUMERIC",
+                "mode": "NULLABLE"
+            }
+        ]
+    },
+    "products": {
+        "fields":[
+            {
+                "name": "product_id",
+                "type": "INT64",
+                "mode": "REQUIRED"
+            },
+            {
+                "name": "product_name",
+                "type": "STRING",
+                "mode": "NULLABLE"
+            },{
+                "name": "product_type",
+                "type": "STRING",
+                "mode": "NULLABLE"
+            },
+            {
+                "name": "category",
+                "type": "STRING",
+                "mode": "NULLABLE"
+            },
+            {
+                "name": "brand",
+                "type": "STRING",
+                "mode": "NULLABLE"
+            },
+            {
+                "name": "weight",
+                "type": "FLOAT64",
+                "mode": "NULLABLE"
+            },
+            {
+                "name": "price",
+                "type": "FLOAT64",
+                "mode": "NULLABLE"
+            }
+        ]
+    },
+    "customers": {
+        "fields":[
+            {
+                "name": "customer_id",
+                "type": "INT64",
+                "mode": "REQUIRED"
+            },
+            {
+                "name": "email",
+                "type": "STRING",
+                "mode": "NULLABLE"
+            },
+            {
+                "name": "country",
+                "type": "STRING",
+                "mode": "NULLABLE"
+            },
+            {
+                "name": "signup_date",
+                "type": "DATE",
+                "mode": "NULLABLE"
+            },
+            {
+                "name": "first_name",
+                "type": "STRING",
+                "mode": "NULLABLE"
+            },
+            {
+                "name": "last_name",
+                "type": "STRING",
+                "mode": "NULLABLE"
+            }
+        ]
+    },
+    "store": {
+        "fields":[
+            {
+                "name": "store_id",
+                "type": "INT64",
+                "mode": "REQUIRED"
+            },
+            {
+                "name": "store_name",
+                "type": "STRING",
+                "mode": "NULLABLE"
+            },{
+                "name": "store_type",
+                "type": "STRING",
+                "mode": "NULLABLE"
+            },
+            {
+                "name": "region",
+                "type": "STRING",
+                "mode": "NULLABLE"
+            }
+        ]
+    },
+    "shipment": {
+        "fields":[
+            {
+                "name": "shipment_id",
+                "type": "INT64",
+                "mode": "REQUIRED"
+            },
+            {
+                "name": "customer_id",
+                "type": "INT64",
+                "mode": "REQUIRED"
+            },
+            {
+                "name": "shipment_date",
+                "type": "DATE",
+                "mode": "NULLABLE"
+            },
+            {
+                "name": "delivery_date",
+                "type": "DATE",
+                "mode": "NULLABLE"
+            },
+            {
+                "name": "origin",
+                "type": "STRING",
+                "mode": "NULLABLE"
+            },
+            {
+                "name": "destination",
+                "type": "STRING",
+                "mode": "NULLABLE"
+            },
+            {
+                "name": "store_id",
+                "type": "INT64",
+                "mode": "NULLABLE"
+            },
+            {
+                "name": "transport_mode",
+                "type": "STRING",
+                "mode": "NULLABLE"
+            },
+            {
+                "name": "total_weight",
+                "type": "FLOAT64",
+                "mode": "NULLABLE"
+            },
+            {
+                "name": "total_cost",
+                "type": "FLOAT64",
+                "mode": "NULLABLE"
+            }
+        ]
+    }
+}

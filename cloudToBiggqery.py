@@ -17,11 +17,23 @@ with DAG(
     schedule_interval='@daily',
     catchup=False,
 ) as dag:
+    def log_execution_date(**kwargs):
+     execution_date = kwargs.get("dag_run").conf.get("execution_date", kwargs.get("ds"))
+     print(f"Execution date: {execution_date}")
+
+    log_date_task = PythonOperator(
+     task_id="log_execution_date",
+     python_callable=log_execution_date,
+     provide_context=True,
+    )
+
+
     task_1 = GCSToBigQueryOperator(
         task_id = "load_to_bigquery",
         bucket='shippment_bucket',
-        source_objects=["sales_{{ ds }}.csv"],
-        destination_project_dataset_table='shipment_dataset_huy.sales_{{ ds }}_staging',
+        source_objects=["sales_{{ dag_run.conf.execution_date or ds }}.csv"],
+        destination_project_dataset_table='shipment_dataset_huy.sales_{{ dag_run.conf.execution_date or ds }}_staging',
+
         schema_fields=[
             {"name": "sale_id", "type": "INT64", "mode": "NULLABLE"},
             {"name": "store_id", "type": "INT64", "mode": "NULLABLE"},
@@ -32,7 +44,9 @@ with DAG(
         ],
         write_disposition="WRITE_TRUNCATE",
 
+    
     )
+    log_date_task >> task_1
     task_2 = BigQueryInsertJobOperator(
         task_id="insert_job",
         configuration={
@@ -47,13 +61,13 @@ with DAG(
                         sale_amount,
                         quantity_sold + sale_amount AS return_sale
                     FROM
-                        `shipment_dataset_huy.sales_{{ ds }}_staging`
+                        `shipment_dataset_huy.sales_{{dag_run.conf.execution_date}}_staging`
                 """,
                 "useLegacySql": False,
                 "destinationTable": {
                     "projectId": "my-second-project-445300",
                     "datasetId": "shipment_dataset_huy",
-                    "tableId": "sales_{{ ds }}",
+                    "tableId": "sales_{{dag_run.conf.execution_date}}",
                 },
                 "writeDisposition": "WRITE_TRUNCATE", 
             }
@@ -64,7 +78,7 @@ with DAG(
     configuration={
         "query": {
             "query": """
-                DROP TABLE `shipment_dataset_huy.sales_{{ ds }}_staging`
+                DROP TABLE `shipment_dataset_huy.sales_{{dag_run.conf.execution_date}}_staging`
             """,
             "useLegacySql": False,
         }
