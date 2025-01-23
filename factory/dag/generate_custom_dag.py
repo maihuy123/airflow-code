@@ -14,10 +14,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 
 def load_postgres_to_csv(table_name,jobs,config,tables):
-    
-
     hook = PostgresHook(postgres_conn_id=config.get("postgres_conn_id"))
-
     sql_file_path = f'/{BASE_DIR}/resource/postgrest/{jobs}.sql'
     try:
         with open(sql_file_path, 'r') as sql_file:
