@@ -2,16 +2,16 @@ from datetime import datetime, timedelta
 import json
 from util.env_variables import get_config, get_schema
 from pathlib import Path
-from factory.dag.generate_custom_dag import generate_dag_daily 
+from factory.dag.generate_custom_dag import generate_dag_daily
 
 env_vars = get_config()
 schema_vars = get_schema(Path(__file__).resolve())
 
 defaul_args = {
-    'owner': 'airflow',
-    'start_date': datetime(2025, 1, 1),
-    'retries': 1,
-    'retry_delay': timedelta(minutes=5),
+    "owner": "airflow",
+    "start_date": datetime(2025, 1, 1),
+    "retries": 1,
+    "retry_delay": timedelta(minutes=5),
 }
 
 params = {
@@ -30,32 +30,31 @@ params_per_dag = [
         "schedule": "@once",
         "catchup": False,
         "schema": schema_vars.get("sales").get("fields"),
-        "tasks" : ["daily_insert_custom"],
+        "tasks": ["daily_insert_custom"],
         "dag_run_timeout": timedelta(minutes=10),
         "postgres_sql": {
-            "select" : 'sale_id, store_id, product_id, sale_date, quantity_sold, sale_amount',
-            "from" : 'sales',
-            "where" : "sale_date = '2024-12-20'",
-            "limit" : None
-        }
-        
+            "select": "sale_id, store_id, product_id, sale_date, quantity_sold, sale_amount",
+            "from": "sales",
+            "where": "sale_date = '2024-12-20'",
+            "limit": None,
+        },
     },
     {
-        "table_name" : "shipment",
+        "table_name": "shipment",
         "sla": timedelta(minutes=30),
         "schedule": "@daily",
         "catchup": False,
         "schema": schema_vars.get("shippment"),
-        "tasks" : ["daily_insert_custom"],
+        "tasks": ["daily_insert_custom"],
         "dag_run_timeout": timedelta(minutes=10),
         "postgres_sql": {
-            "select" : 'shipment_id, customer_id, shipment_date',
-            "from" : 'shipment',
-            "where" : None,
-            "limit" : None
-        }
-    }
+            "select": "shipment_id, customer_id, shipment_date",
+            "from": "shipment",
+            "where": None,
+            "limit": None,
+        },
+    },
 ]
 
 for table in params_per_dag:
-    globals()[table.get("table_name")] = generate_dag_daily(params,table,defaul_args)
+    globals()[table.get("table_name")] = generate_dag_daily(params, table, defaul_args)
