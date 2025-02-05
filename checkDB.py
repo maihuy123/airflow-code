@@ -1,11 +1,13 @@
 import psycopg2 as db
 import pandas as pd
 import json
-SCHEMA_FIELDS = "/home/huy/airflow/dags/config/development.json"
 
-config = {
-    "dataset": json.load(open(SCHEMA_FIELDS)).get("sale_dataset"),
-    "project_id": json.load(open(SCHEMA_FIELDS)).get("project_id"),
-    "bucket": json.load(open(SCHEMA_FIELDS)).get("bucket_sale"),
-}
-print(config["bucket"])
+try:
+    file_path = "/tmp/daily_custom_schema_sales_2025_02_03.csv"
+    data = pd.read_csv(file_path)
+    print(f"Found file {file_path}")
+    print(data.head())
+    if data.empty:
+        print(f"Data validation for daily_custom_schema_sales is not OK")
+except FileNotFoundError:
+    print(f"File {file_path} not found")
