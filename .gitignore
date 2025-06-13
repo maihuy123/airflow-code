@@ -1,4 +1,88 @@
+# Byte-compiled / optimized / DLL files
 __pycache__/
-*.pyc
-*.pyo
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+env/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Installer logs
+debug.log
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+.pytest_cache/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# pyenv
+.python-version
+
+# pipenv
+Pipfile.lock
+
+# poetry
 poetry.lock
+
+# mypy
+.mypy_cache/
+.dmypy.json
+
+# Pyre type checker
+.pyre/
+
+# VS Code
+.vscode/
+
+# Airflow
+airflow.db
+logs/
+
+# Docker
+*.pid
+
+# Google Cloud credentials and secrets
+my-second-project-445300-aa1ca87cf386.json
+*.json
+!dags/config/*.json
+
+# Ignore DAG compiled files
+*.pyc
+
+# Ignore environment files
+.env
+
+# Ignore Jenkins secrets
+secrets/
+
+# Ignore other secrets
+secrets.json
+
