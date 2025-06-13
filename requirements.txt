@@ -1,0 +1,8 @@
+apache-airflow==2.8.1
+# Add any other dependencies below
+python-dotenv
+pandas
+psycopg2-binary
+apache-airflow-providers-google
+apache-airflow-providers-postgres
+jinja2
